@@ -10,167 +10,172 @@
 
 <body ng-app="crudController">
     <div class="container">
-    <div ng-controller="crudController">
-        <hr>
+        <div ng-controller="crudController">
+            <hr>
 
-        <button type="button" class="btn btn-primary btn-medium pull-right" data-toggle="modal" data-target="#addUserModal"> New User</button>
-        <h2>Angular Crud </h2>
-        <span class="clearfix"></span>
-        <hr>
+            <button type="button" class="btn btn-primary btn-medium pull-right" data-toggle="modal" data-target="#addUserModal"> New User</button>
+            <h2>Angular Crud </h2>
+            <span class="clearfix"></span>
+            <hr>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>Configuration</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="user in users">
+                        <td>{{ $id+1}}</td>
+                        <td>{{ user.username}} {{ user.fullname }}</td>
+                        <td>{{ user.email }}</td>
+                        <!-- Option User -->
+                        <td>
+                            <div class="btn-group open">
+                                <a class="btn btn-default" href="#"> <i class="fa fa-cog" aria-hidden="true"></i> Option</a>
+                                <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
+                                    <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#EditUserModal"  ng-click="selectUser()"><i class="fa fa-pencil fa-fw"></i> Edit</a>
+                                    </li>
+                                    <li class="divider"></li>
+                                    <li>
+                                        <a href="#" data-toggle="modal" data-target="#DeleteUserModal"><i class="fa fa-trash-o fa-fw"></i> Delete</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td>
+                        <!-- //End Option Users-->
+                    </tr>
+                </tbody>
+            </table>
 
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Username</th>
-                    <th>Email</th>
-                    <th>Configuration</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in users">
-                    <td>{{ $id+1}}</td>
-                    <td>{{ user.username}} {{ user.fullname }}</td>
-                    <td>{{ user.email }}</td>
-                    <!-- Option User -->
-                    <td>
-                        <div class="btn-group open">
-                            <a class="btn btn-default" href="#"> <i class="fa fa-cog" aria-hidden="true"></i> Option</a>
-                            <a class="btn btn-default dropdown-toggle" data-toggle="dropdown" href="#">
-                                <span class="fa fa-caret-down" title="Toggle dropdown menu"></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li><a href="#" data-toggle="modal" data-target="#EditUserModal"><i class="fa fa-pencil fa-fw"></i> Edit</a></li>
-                                <li class="divider"></li>
-                                <li><a href="#" data-toggle="modal" data-target="#DeleteUserModal"><i class="fa fa-trash-o fa-fw"></i> Delete</a></li>
 
-                            </ul>
+
+            <!-- Modal New User -->
+            <div class="modal fade" id="addUserModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">New User
+                            </h4>
                         </div>
-                    </td>
-                    <!-- //End Option Users-->
-                </tr>
-            </tbody>
-        </table>
-
-
-
-        <!-- Modal New User -->
-        <div class="modal fade" id="addUserModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">New User
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    <input class="form-control" type="text" placeholder="Enter User Name">
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                        <input class="form-control" type="text" placeholder="Enter User Name" ng-model="newUser.username">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    <input class="form-control" type="text" placeholder="Enter Full Name">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                        <input class="form-control" type="text" placeholder="Enter Full Name" ng-model="newUser.fullname">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                                    <input class="form-control" type="email" required placeholder="Email address">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                        <input class="form-control" type="email" placeholder="Email address" ng-model="newUser.email">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-success"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Close</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-success" ng-click="saveUser()"><i class="fa fa-save" aria-hidden="true"></i> Save</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Close</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- // End Modal New User-->
+            <!-- // End Modal New User-->
 
 
 
-        <!-- Modal EDIT User -->
-        <div class="modal fade" id="EditUserModal" role="dialog">
-            <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Edit User
-                        </h4>
-                    </div>
-                    <div class="modal-body">
-                        <form class="form-horizontal">
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    <input class="form-control" type="text" placeholder="Enter User Name">
+            <!-- Modal EDIT User -->
+            <div class="modal fade" id="EditUserModal" role="dialog">
+                <div class="modal-dialog">
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Edit User
+                            </h4>
+                        </div>
+                        <div class="modal-body">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                        <input class="form-control" type="text" placeholder="Enter User Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
-                                    <input class="form-control" type="text" placeholder="Enter Full Name">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                                        <input class="form-control" type="text" placeholder="Enter Full Name">
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="input-group margin-bottom-sm">
-                                    <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
-                                    <input class="form-control" type="email" required placeholder="Email address">
+                                <div class="form-group">
+                                    <div class="input-group margin-bottom-sm">
+                                        <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+                                        <input class="form-control" type="email" placeholder="Email address">
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-warning "><i class="fa fa-save" aria-hidden="true"></i> Edit</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i> Close</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-warning "><i class="fa fa-save" aria-hidden="true"></i> Edit
+                        </button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> Close
+                        </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- // End Modal EDIT User-->
+            <!-- // End Modal EDIT User-->
 
 
-        <!-- Modal DELETE User -->
-        <div class="modal fade" id="DeleteUserModal" role="dialog">
-            <div class="modal-dialog">
+            <!-- Modal DELETE User -->
+            <div class="modal fade" id="DeleteUserModal" role="dialog">
+                <div class="modal-dialog">
 
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">Are you sure?</h4>
-                    </div>
-                    <div class="modal-body">
-                        <!--Formulario New User-->
-                        <form class="form-horizontal">
-                            <div class="form-group text-center">
-                                <div class="col-sm-12">
-                                    <p class="text-danger">You are going to delete ... </p>
+                    <!-- Modal content-->
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <h4 class="modal-title">Are you sure?</h4>
+                        </div>
+                        <div class="modal-body">
+                            <!--Formulario New User-->
+                            <form class="form-horizontal">
+                                <div class="form-group text-center">
+                                    <div class="col-sm-12">
+                                        <p class="text-danger">You are going to delete ... </p>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
-                        <!-- // End Formulario -->
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>Yes</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i>No</button>
+                            </form>
+                            <!-- // End Formulario -->
+                        </div>
+                        <div class="modal-footer">
+                            <button type="submit" class="btn btn-danger"><i class="fa fa-trash-o fa-fw"></i>Yes</button>
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-sign-out" aria-hidden="true"></i>No</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <!-- // End Modal DELETE User-->
+            <!-- // End Modal DELETE User-->
 
-    </div>
-    <!-- // End Controller -->
+        </div>
+        <!-- // End Controller -->
 
     </div>
     <!-- //End Container-->

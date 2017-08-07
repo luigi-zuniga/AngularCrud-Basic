@@ -4,6 +4,8 @@ myApp.controller('crudController', ['$scope', function ($scope) {
 
     console.log('In my Array Controller');
 
+    $scope.newUser = {};
+    
     $scope.users = [
         {
             username: "Luigi",
@@ -27,4 +29,16 @@ myApp.controller('crudController', ['$scope', function ($scope) {
         }
     ];
 
+    $scope.saveUser = function(){
+        console.log($scope.newUser); 
+        $scope.users.push($scope.newUser);
+        $scope.newUser = {};
+
+    };
+    
+    $scope.selectUser = function(user){
+        console.log(user);
+    }
+    
+    
 }])
